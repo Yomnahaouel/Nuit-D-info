@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Village Numérique Résistant - Démarche NIRD</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@300;400;600&family=Fredoka+One&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Palette harmonisée */
+            --primary: #2458e8;        /* bleu principal */
+            --secondary: #2f3aa1;      /* indigo secondaire */
+            --accent: #7c4dff;         /* violet d'accent */
+            --success: #20c997;        /* vert (badges / succès) */
+            --warning: #ffb703;        /* jaune/orange chaud */
+            --light: #f8f9fa;
+            --dark: #0b2b3a;           /* fond sombre homogène */
+            --muted: #6c7a89;
+            --village-green: #8ac926;  /* nuance conservée */
+
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --card-gradient: linear-gradient(135deg, rgba(36,88,232,0.95), rgba(124,77,255,0.9));
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+ 
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .font-fredoka {
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding-top: 80px; /* <-- AJOUTEZ CETTE LIGNE pour compenser la navbar fixe */
+    overflow-y: auto; /* Ajouté pour permettre le défilement vertical */
+        }
+        
+        /* Animation de fond de village */
+        .village-bg {
+            position: relative;
+            overflow: visible; /* permit scrolling — was blocking scroll when set to hidden */
+        }
+
+        /* Ensure html/body allow smooth/touch scrolling */
+        html, body {
+            height: auto;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch; /* momentum on iOS */
+            touch-action: pan-y; /* allow vertical pan gestures */
+        }
+        
+        /* Navigation améliorée */
+/* ============ NAVBAR CORRIGÉE ============ */
+.navbar {
+    background: rgba(67, 97, 238, 0.98) !important;
+    backdrop-filter: blur(10px);
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    border-bottom: 3px solid var(--village-green);
+    height: 80px; /* Hauteur fixe */
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white !important;
+    font-family: 'Fredoka One', cursive;
+    display: flex;
+    align-items: center;
+    height: 80px; /* Alignement vertical */
+    padding: 0 15px;
+}
+
+.navbar-brand i {
+    font-size: 1.8rem;
+    margin-right: 10px;
+}
+
+/* Conteneur pour aligner les items */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    height: 100%; /* Prend toute la hauteur de la navbar */
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    height: 100%; /* Prend toute la hauteur de la navbar */
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 500;
+    padding: 0 16px !important;
+    transition: all 0.3s;
+    position: relative;
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    height: 100%; /* Prend toute la hauteur */
+    border-radius: 0; /* Pas de bordure arrondie pour alignement */
+}
+
+/* Alignement parfait icône/texte */
+.nav-link i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+    line-height: 1;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    height: 24px; /* Hauteur fixe pour l'icône */
+}
+
+.nav-link span {
+    line-height: 1;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    height: 24px; /* Même hauteur que l'icône */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--warning);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: white !important;
+    background: rgba(255,255,255,0.1);
+}
+
+/* Bouton "Rejoindre" aligné */
+.btn-nird.nav-btn {
+    background: var(--gradient);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(36,88,232,0.15);
+    display: flex;
+    align-items: center;
+    height: 40px; /* Hauteur fixe */
+    margin: 0 15px;
+}
+
+.btn-nird.nav-btn i {
+    font-size: 1rem;
+    margin-right: 8px;
+    height: auto;
+}
+
+.btn-nird.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+}
+
+/* Toggler personnalisé */
+.navbar-toggler {
+    border: none;
+    padding: 10px;
+    margin-right: 15px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Responsive pour mobile */
+@media (max-width: 991px) {
+    .navbar-nav {
+        background: rgba(67, 97, 238, 0.95);
+        padding: 20px;
+        border-radius: 0 0 10px 10px;
+        margin-top: 0;
+    }
+    
+    .nav-item {
+        height: auto;
+        margin: 5px 0;
+    }
+    
+    .nav-link {
+        height: 50px;
+        border-radius: 10px;
+        padding: 0 20px !important;
+    }
+    
+    .btn-nird.nav-btn {
+        margin: 10px 0;
+        width: 100%;
+        justify-content: center;
+    }
+}
+        
+        /* Hero Section améliorée */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            animation: wave 20s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(-50px) translateY(20px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* Villageois (personnages) */
+        .villageois-container {
+            position: relative;
+            height: 300px;
+        }
+        
+        .villageois {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            filter: drop-shadow(5px 5px 0 rgba(0,0,0,0.1));
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .villageois:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        .villageois-1 {
+            top: 50px;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .villageois-2 {
+            top: 100px;
+            right: 15%;
+            animation: float 7s ease-in-out infinite 0.5s;
+        }
+        
+        .villageois-3 {
+            bottom: 50px;
+            left: 20%;
+            animation: float 5s ease-in-out infinite 1s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Cards améliorées */
+        .card-nird {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            height: 100%;
+            position: relative;
+        }
+        
+        .card-nird::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient);
+            z-index: 1;
+        }
+        
+        .card-nird:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card-icon {
+            height: 120px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .card-body-nird {
+            padding: 25px;
+        }
+        
+        /* Buttons améliorés */
+        .btn-nird {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(36,88,232,0.15);
+        }
+        
+        .btn-nird::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-nird:hover::after {
+            left: 100%;
+        }
+        
+        .btn-nird:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        /* Animation pour les cartes de la démarche */
+        #demarche .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
+        }
+        
+        #demarche .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+        
+        /* Section Distributions améliorée */
+        .distro-card {
+            transition: all 0.4s;
+            border: 3px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(var(--angle), var(--primary), var(--secondary)) border-box;
+            animation: borderRotate 10s linear infinite;
+        }
+        
+        @keyframes borderRotate {
+            0% { --angle: 0deg; }
+            100% { --angle: 360deg; }
+        }
+        
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        
+        /* Stats améliorées */
+        .stat-box {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #e3f2fd, #bbdefb) border-box;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        /* Footer amélioré */
+        footer {
+            background: var(--dark);
+            color: rgba(207,232,255,0.95);
+            padding: 28px 0;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        /* Remplacer les zones "noires" (bg-dark) par une couleur sombre harmonisée */
+        .bg-dark {
+            background-color: var(--dark) !important; /* évite le noir pur */
+            color: rgba(255,255,255,0.95) !important;
+        }
+        
+        /* Atténuer les cartes de type challenge qui utilisaient bg-dark */
+        .card-nird.challenge-card.bg-dark,
+        .card-nird.challenge-card.bg-dark.bg-opacity-25 {
+            background: linear-gradient(180deg, rgba(11,43,58,0.95), rgba(11,43,58,0.75)) !important;
+            border-color: rgba(255,255,255,0.04) !important;
+            color: rgba(255,255,255,0.95);
+        }
+        
+        /* Tables sombres un peu plus douces */
+        .table-dark {
+            background-color: rgba(11,43,58,0.9) !important;
+        }
+        
+        /* Si une section précise reste noire, cibler #defis explicitement */
+        #defis {
+            background-color: var(--dark) !important;
+            color: rgba(255,255,255,0.95);
+        }
+        
+        footer .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        
+        footer .social-icons a {
+            color: #cfe8ff;
+            font-size: 1.1rem;
+            margin: 0 8px;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.03);
+            transition: background 0.15s, transform 0.15s;
+        }
+        
+        footer .social-icons a:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
+        }
+        
+        footer p, footer small {
+            margin: 0;
+            color: rgba(207,232,255,0.85);
+        }
+        
+        footer small { color: rgba(207,232,255,0.65); display:block; margin-top:8px; }
+    </style>
+</head>
+<body class="village-bg">
+    <!-- Navigation -->
+    <!-- Navigation -->
+<!-- Navigation CORRIGÉE -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-shield-alt"></i>
+            <span class="font-fredoka ms-2">NIRD</span>
+            <small class="ms-2 opacity-75 d-none d-md-inline" style="font-size: 0.8rem;">Le Village Résistant</small>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#accueil">
+                        <i class="fas fa-home"></i>
+                        <span>Accueil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#pilier">
+                        <i class="fas fa-gem"></i>
+                        <span>3 Piliers</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#distributions">
+                        <i class="fab fa-linux"></i>
+                        <span>Distributions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#demarche">
+                        <i class="fas fa-road"></i>
+                        <span>La Démarche</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#defis">
+                        <i class="fas fa-star"></i>
+                        <span>Talents</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#chatii">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Chatii</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- "Rejoindre" button removed from navbar -->
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="container position-relative z-1">
+            <div class="row align-items-center">
+                <div class="col-lg-6 fade-in-up">
+                    <h1 class="display-3 fw-bold mb-4 font-fredoka">
+                        Le Village <span class="text-warning">Numérique</span><br>
+                        <span class="text-success">Résistant</span>
+                    </h1>
+                    <p class="lead mb-4">
+                        <strong class="font-fredoka">David contre Goliath numérique !</strong><br>
+                        Un collectif enseignant invite les écoles à résister aux Big Tech<br>
+                        avec un numérique <span class="text-warning fw-bold">Inclusif, Responsable et Durable</span>.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+                        <!-- Boutons harmonisés : même classe / même couleur -->
+                        <a href="#pilier" class="btn btn-nird btn-lg">
+                            <i class="fas fa-info-circle me-2"></i>Découvrir NIRD
+                        </a>
+                        <a href="#defis" class="btn btn-nird btn-lg">
+                            <i class="fas fa-star me-2"></i>Explorer les talents
+                        </a>
+                        <a href="#participer" class="btn btn-nird btn-lg">
+                            <i class="fas fa-users me-2"></i>Rejoindre
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in-up delay-1">
+                    <div class="villageois-container">
+                        <!-- Villageois 1 -->
+                        <div class="villageois villageois-1" onclick="showVillageois(1)">
+                            <div class="card-nird" style="width: 120px;">
+                                <div class="card-icon" style="background: linear-gradient(135deg, #4361ee, #3a0ca3);">
+                                    <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                                </div>
+                                <div class="card-body-nird p-2 text-center">
+                                    <h6 class="mb-0">Prof Astérix</h6>
+                                    <small class="text-muted">Enseignant résistant</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Villageois 2 -->
+                        <div class="villageois villageois-2" onclick="showVillageois(2)">
+                            <div class="card-nird" style="width: 120px;">
+                                <div class="card-icon" style="background: linear-gradient(135deg, #06D6A0, #118AB2);">
+                                    <i class="fas fa-laptop-code fa-2x"></i>
+                                </div>
+                                <div class="card-body-nird p-2 text-center">
+                                    <h6 class="mb-0">Obélix Code</h6>
+                                    <small class="text-muted">Hacker en herbe</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Villageois 3 -->
+                        <div class="villageois villageois-3" onclick="showVillageois(3)">
+                            <div class="card-nird" style="width: 120px;">
+                                <div class="card-icon" style="background: linear-gradient(135deg, #FFD166, #FF9E00);">
+                                    <i class="fas fa-city fa-2x"></i>
+                                </div>
+                                <div class="card-body-nird p-2 text-center">
+                                    <h6 class="mb-0">Panoramix Tech</h6>
+                                    <small class="text-muted">Collectivité éclairée</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats rapides -->
+            <div class="row mt-5 pt-4">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-box fade-in-up delay-2">
+                        <div class="stat-number" id="counter1">0</div>
+                        <p class="mb-0 text-muted">Écoles engagées</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-box fade-in-up delay-3">
+                        <div class="stat-number" id="counter2">0</div>
+                        <p class="mb-0 text-muted">Ordinateurs reconditionnés</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-box fade-in-up delay-4">
+                        <div class="stat-number" id="counter3">0</div>
+                        <p class="mb-0 text-muted">Membres actifs</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-box fade-in-up delay-5">
+                        <div class="stat-number" id="counter4">0</div>
+                        <p class="mb-0 text-muted">Économies réalisées</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto text-center">
+                    <div class="alert alert-info animate-on-scroll">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        <strong>Au carrefour de la transformation numérique et de la transition écologique</strong><br>
+                        À l'heure où la <strong>fin du support de Windows 10</strong> nous rappelle notre dépendance, 
+                        nous construisons ensemble un numérique aligné avec les objectifs de développement durable.
+                    </div>
+                    
+                    <!-- Mini jeu interactif -->
+                    <div class="mini-jeu mt-4 animate-on-scroll" onclick="startMiniJeu()">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h4 class="mb-3">
+                                    <i class="fas fa-gamepad me-2"></i>
+                                    Défi du Village : Sauvez les vieux ordinateurs !
+                                </h4>
+                                <p class="mb-0">
+                                    Cliquez ici pour aider à reconditionner des ordinateurs avec Linux !
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="display-1">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Les 3 piliers -->
+    <section id="pilier" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5 animate-on-scroll">
+                <h2 class="display-5 fw-bold mb-3 font-fredoka">
+                    <i class="fas fa-gem me-2"></i>
+                    La Potion Magique <span class="text-primary">NIRD</span>
+                </h2>
+                <p class="lead text-muted">Notre recette secrète pour résister aux GAFAM !</p>
+            </div>
+            
+            <div class="pillars-container animate-on-scroll">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="pillar-card pillar-inclusive">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-primary p-3 me-3 shadow">
+                                    <i class="fas fa-hands-helping fa-2x text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="mb-0">Inclusion</h3>
+                                    <small class="text-primary">🤝 Accès pour tous</small>
+                                </div>
+                            </div>
+                            <p class="mb-3">
+                                Logiciels libres accessibles à tous les élèves, réduction de la fracture numérique, 
+                                interfaces adaptées aux besoins éducatifs.
+                            </p>
+                            <div class="badge bg-primary">Gratuit</div>
+                            <div class="badge bg-info ms-1">Accessible</div>
+                            <div class="badge bg-success ms-1">Équitable</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="pillar-card pillar-responsable animate-on-scroll" style="animation-delay: 0.2s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-secondary p-3 me-3 shadow">
+                                    <i class="fas fa-user-shield fa-2x text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="mb-0">Responsabilité</h3>
+                                    <small class="text-secondary">🛡️ Souveraineté numérique</small>
+                                </div>
+                            </div>
+                            <p class="mb-3">
+                                Respect des données personnelles, technologies souveraines, 
+                                éthique numérique et formation citoyenne.
+                            </p>
+                            <div class="badge bg-secondary">Éthique</div>
+                            <div class="badge bg-primary ms-1">Sécurisé</div>
+                            <div class="badge bg-warning ms-1">Souverain</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="pillar-card pillar-durable animate-on-scroll" style="animation-delay: 0.4s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-accent p-3 me-3 shadow" style="background: var(--accent);">
+                                    <i class="fas fa-recycle fa-2x text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="mb-0">Durabilité</h3>
+                                    <small class="text-accent">🌱 Écologique</small>
+                                </div>
+                            </div>
+                            <p class="mb-3">
+                                Lutte contre l'obsolescence programmée, reconditionnement, 
+                                réduction des déchets électroniques, sobriété numérique.
+                            </p>
+                            <div class="badge bg-success">Écologique</div>
+                            <div class="badge bg-info ms-1">Économique</div>
+                            <div class="badge bg-warning ms-1">Durable</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Les distributions Linux -->
+    <section id="distributions" class="py-5" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+        <div class="container">
+            <div class="text-center mb-5 animate-on-scroll">
+                <h2 class="display-5 fw-bold mb-3 font-fredoka">
+                    <i class="fab fa-linux me-2"></i>
+                    🐧 Nos Distributions <span class="text-primary">Linux</span>
+                </h2>
+                <p class="lead text-muted">
+                    Créées par des enseignants, pour les enseignants !
+                </p>
+            </div>
+
+            <!-- Les deux distributions -->
+            <div class="row g-5">
+                <!-- Linux NIRD -->
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="distro-card card h-100 border-0 shadow-lg">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-4">
+                                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                     style="width: 80px; height: 80px; background: linear-gradient(135deg, #4361ee, #3a0ca3);">
+                                    <i class="fab fa-linux fa-2x text-white"></i>
+                                </div>
+                                <h3 class="h2 fw-bold text-primary">
+                                    🎓 Linux NIRD
+                                </h3>
+                                <p class="text-muted mb-4">Pour le secondaire • Créée par des enseignants du lycée Carnot</p>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-6 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-user-friends text-primary mt-1 me-2"></i>
+                                        <div>
+                                            <small class="fw-bold">Par et pour les enseignants</small>
+                                            <div class="text-muted"><small>Support communautaire sur Tchap</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-bolt text-warning mt-1 me-2"></i>
+                                        <div>
+                                            <small class="fw-bold">Léger et rapide</small>
+                                            <div class="text-muted"><small>Linux Mint + Xfce, tourne sur anciens PC</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-recycle text-success mt-1 me-2"></i>
+                                        <div>
+                                            <small class="fw-bold">Parfait pour le reconditionnement</small>
+                                            <div class="text-muted"><small>Donne une seconde vie aux vieux ordinateurs</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-book text-info mt-1 me-2"></i>
+                                        <div>
+                                            <small class="fw-bold">Complet</small>
+                                            <div class="text-muted"><small>Tous les logiciels pour collège/lycée</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Boutons de téléchargement + vérification -->
+                            <div class="mt-4 pt-3 border-top">
+                                <h5 class="mb-3">📥 Télécharger - Linux NIRD</h5>
+                                <div class="d-grid gap-2">
+                                    <a class="btn btn-primary" href="https://example.org/linux-nird-0.1.iso" target="_blank" rel="noopener">
+                                        <i class="fas fa-download me-2"></i>Télécharger l'image (ISO) — Version installable
+                                    </a>
+                                    <a class="btn btn-outline-secondary" href="https://example.org/linux-nird-0.1.iso.md5" target="_blank" rel="noopener">
+                                        <i class="fas fa-hashtag me-2"></i>Fichier MD5 (vérification)
+                                    </a>
+                                    <a class="btn btn-outline-primary" href="https://maths-code.fr/iso/NIRD-2025_USB_eleve.iso" target="_blank" rel="noopener">
+                                        <i class="fas fa-usb me-2"></i>Télécharger version clé USB (live)
+                                    </a>
+                                    <a class="btn btn-outline-secondary" href="https://maths-code.fr/iso/NIRD-2025.md5" target="_blank" rel="noopener">
+                                        <i class="fas fa-hashtag me-2"></i>MD5 clé USB
+                                    </a>
+                                </div>
+
+                                <small class="d-block text-muted mt-2">
+                                    Vérifiez l'intégrité du fichier téléchargé avec la commande <code>md5sum</code> (Linux/macOS) ou un utilitaire équivalent sur Windows.
+                                </small>
+
+                                
+                                <div class="mt-2">
+                                    <span class="small text-muted ms-2">•</span>
+                                    <a class="link-secondary small ms-2" href="https://tube-numerique-educatif.apps.education.fr/w/o38jV2DpXyy3zVM8GDYh9M" target="_blank" rel="noopener">
+                                        ▶️ Présentation vidéo (2 min)
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PrimTux -->
+                <div class="col-lg-6 animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="distro-card card h-100 border-0 shadow-lg">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-4">
+                                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                     style="width: 80px; height: 80px; background: linear-gradient(135deg, #28a745, #20c997);">
+                                    <i class="fas fa-school fa-2x text-white"></i>
+                                </div>
+                                <h3 class="h2 fw-bold text-success">
+                                    🏫 PrimTux
+                                </h3>
+                                <p class="text-muted mb-4">La référence Linux pour les écoles primaires</p>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-6 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-users text-primary mt-1 me-2"></i>
+                                        <div>
+                                            <small class="fw-bold">Multi-profils</small>
+                                            <div class="text-muted"><small>Cycles 1, 2, 3 + profil enseignant</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-gamepad text-success mt-1 me-2"></i>
+                                        <div>
+                                            <small class="fw-bold">Riche en ressources</small>
+                                            <div class="text-muted"><small>Des centaines d'activités intégrées</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-hands-helping text-info mt-1 me-2"></i>
+                                        <div>
+                                            <small class="fw-bold">Communauté active</small>
+                                            <div class="text-muted"><small>Association, forum Tchap, webinaires</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-shield-alt text-warning mt-1 me-2"></i>
+                                        <div>
+                                            <small class="fw-bold">Soutenu par la DNE</small>
+                                            <div class="text-muted"><small>Stratégie numérique 2023-2027</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Liens ressources PrimTux -->
+                            <div class="mt-4 pt-3 border-top">
+                                <h5 class="mb-3">🔗 Ressources PrimTux</h5>
+                                <div class="d-grid gap-2">
+                                    <a class="btn btn-success" href="https://primtux.fr" target="_blank" rel="noopener">
+                                        <i class="fas fa-globe me-2"></i>Site officiel PrimTux
+                                    </a>
+                                    <a class="btn btn-outline-success" href="https://primtux.fr/ptx8.mp4" target="_blank" rel="noopener">
+                                        <i class="fas fa-play-circle me-2"></i>Clip présentation (2 min)
+                                    </a>
+                                    <a class="btn btn-outline-secondary" href="https://primtux.fr/Presentation.mp4" target="_blank" rel="noopener">
+                                        <i class="fas fa-chalkboard-teacher me-2"></i>Formation découverte (20 min)
+                                    </a>
+                                    <a class="btn btn-outline-info" href="https://primtux.fr/Primtux-affiche-A3.pdf" target="_blank" rel="noopener">
+                                        <i class="fas fa-file-pdf me-2"></i>Affiche "Que faire avec PrimTux" (PDF)
+                                    </a>
+                                    <a class="btn btn-outline-primary" href="https://distrosea.com/fr/start/primtux-8-xfce/" target="_blank" rel="noopener">
+                                        <i class="fas fa-desktop me-2"></i>Tester PrimTux en ligne
+                                    </a>
+                                </div>
+                                <small class="d-block text-muted mt-2">
+                                    Pour tout accompagnement : forum Tchap PrimTux / NIRD — demandez une aide pas-à-pas.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    <!-- La Démarche NIRD -->
+    <section id="demarche" class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="container">
+            <div class="text-center mb-5 animate-on-scroll">
+                <h2 class="display-5 fw-bold mb-3 font-fredoka">
+                    🌱 La Démarche <span class="text-success">NIRD</span>
+                </h2>
+                <p class="lead text-muted">
+                    Un parcours en 3 étapes pour transformer votre établissement en village numérique résistant
+                </p>
+            </div>
+
+            <!-- Les 3 jalons -->
+            <div class="row g-4 mb-5">
+                <!-- Jalon 1 -->
+                <div class="col-md-4 animate-on-scroll">
+                    <div class="card h-100 border-0 shadow-lg">
+                        <div class="card-body p-4 text-center">
+                            <div class="mb-4">
+                                <div class="rounded-circle d-inline-flex align-items-center justify-content-center" 
+                                     style="width: 80px; height: 80px; background: linear-gradient(135deg, #ffc107, #ff9800);">
+                                    <span class="display-4 text-white fw-bold">1</span>
+                                </div>
+                            </div>
+                            <h3 class="h4 mb-3 text-warning font-fredoka">
+                                <i class="fas fa-bullhorn me-2"></i>Mobiliser
+                            </h3>
+                            <p class="text-muted mb-3">
+                                <strong>Objectif :</strong> Éveiller les consciences et créer une dynamique collective.
+                            </p>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fas fa-user-check text-success me-2"></i>Un enseignant volontaire devient <strong>contact NIRD</strong></li>
+                                <li class="mb-2"><i class="fas fa-chalkboard-teacher text-success me-2"></i>Sensibilisation de l'équipe éducative</li>
+                                <li class="mb-2"><i class="fas fa-network-wired text-success me-2"></i>Mise en réseau via Tchap</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jalon 2 -->
+                <div class="col-md-4 animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="card h-100 border-0 shadow-lg">
+                        <div class="card-body p-4 text-center">
+                            <div class="mb-4">
+                                <div class="rounded-circle d-inline-flex align-items-center justify-content-center" 
+                                     style="width: 80px; height: 80px; background: linear-gradient(135deg, #28a745, #20c997);">
+                                    <span class="display-4 text-white fw-bold">2</span>
+                                </div>
+                            </div>
+                            <h3 class="h4 mb-3 text-success font-fredoka">
+                                <i class="fas fa-flask me-2"></i>Expérimenter
+                            </h3>
+                            <p class="text-muted mb-3">
+                                <strong>Objectif :</strong> Tester concrètement et apprendre par la pratique.
+                            </p>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fab fa-linux text-success me-2"></i>Installation de postes Linux</li>
+                                <li class="mb-2"><i class="fas fa-users text-success me-2"></i>Clubs élèves pour le reconditionnement</li>
+                                <li class="mb-2"><i class="fas fa-school text-success me-2"></i>PrimTux dans les écoles</li>
+                            </ul>
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jalon 3 -->
+                <div class="col-md-4 animate-on-scroll" style="animation-delay: 0.4s;">
+                    <div class="card h-100 border-0 shadow-lg">
+                        <div class="card-body p-4 text-center">
+                            <div class="mb-4">
+                                <div class="rounded-circle d-inline-flex align-items-center justify-content-center" 
+                                     style="width: 80px; height: 80px; background: linear-gradient(135deg, #007bff, #6610f2);">
+                                    <span class="display-4 text-white fw-bold">3</span>
+                                </div>
+                            </div>
+                            <h3 class="h4 mb-3 text-primary font-fredoka">
+                                <i class="fas fa-anchor me-2"></i>Intégrer
+                            </h3>
+                            <p class="text-muted mb-3">
+                                <strong>Objectif :</strong> Ancrer la démarche dans la durée.
+                            </p>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fas fa-project-diagram text-success me-2"></i>Intégration au projet d'établissement</li>
+                                <li class="mb-2"><i class="fas fa-user-tie text-success me-2"></i>Le contact devient <strong>référent NIRD</strong></li>
+                                <li class="mb-2"><i class="fas fa-city text-success me-2"></i>Coopération avec la collectivité</li>
+                            </ul>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nos Talents / Défis — contenus restaurés -->
+ 
+
+    <!-- Participer -->
+    <section id="participer" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5 animate-on-scroll">
+                <h2 class="display-5 fw-bold mb-3 font-fredoka">
+                    <i class="fas fa-door-open me-2"></i>
+                    🚪 Rejoindre le <span class="text-primary">Village</span>
+                </h2>
+                <p class="lead text-muted">Devenez un acteur de la résistance numérique éducative !</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4 animate-on-scroll">
+                    <div class="card h-100 border-start border-4 border-success shadow">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">
+                                <i class="fas fa-comments text-success me-2"></i>
+                                Forum Tchap
+                            </h4>
+                            <p class="card-text">
+                                Rejoignez notre forum Tchap dédié pour échanger, mutualiser, témoigner 
+                                et aider à engager votre établissement scolaire comme pilote de la démarche.
+                            </p>
+                            <a class="btn btn-nird mt-3" href="https://www.tchap.gouv.fr/#/welcome" target="_blank" rel="noopener">
+                                <i class="fas fa-sign-in-alt me-2"></i>Rejoindre le forum
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4 animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="card h-100 border-start border-4 border-primary shadow">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">
+                                <i class="fas fa-chalkboard-teacher text-primary me-2"></i>
+                                Webinaires & Formations
+                            </h4>
+                            <p class="card-text">
+                                Participez à nos webinaires d'information et de formation pour découvrir 
+                                la démarche, Linux, et les techniques de reconditionnement.
+                            </p>
+                            <div class="mt-3">
+                                <!-- Styled exactly like "Rejoindre le forum" but inactive -->
+                                <a class="btn btn-nird mt-3 disabled"
+                                   href="#" role="button" aria-disabled="true"
+                                   style="pointer-events: none; opacity: 0.95;">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Prochainement
+                                </a>
+                            </div>
+                            <!-- Bouton "Voir le programme" supprimé sur demande -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <p class="mb-1">Le Village Numérique Résistant — Initiative collective</p>
+            <div class="social-icons mb-2">
+                <a href="#" aria-label="Mastodon"><i class="fab fa-mastodon"></i></a>
+                <a href="#" aria-label="GitLab"><i class="fab fa-gitlab"></i></a>
+                <a href="#" aria-label="Tchap"><i class="fas fa-comments"></i></a>
+            </div>
+            <small>Développé pendant la Nuit de l'Info 2025 • Licence MIT / CC‑BY</small>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Scripts personnalisés -->
+    <script>
+        // ==================== INITIALISATION ====================
+        window.addEventListener('load', () => {
+            console.log('🏡 Bienvenue au Village Numérique Résistant !');
+            console.log('🛡️ Démarche NIRD - Inclusif, Responsable, Durable');
+            console.log('🎮 Prêt pour l\'aventure numérique ?');
+            
+            // Initialiser les compteurs
+            animateCounters();
+            
+            // Initialiser les particules
+            createParticles();
+            
+            // Initialiser l'animation au scroll
+            initScrollAnimations();
+        });
+        
+        // ==================== ANIMATION AU SCROLL ====================
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        }
+        
+        // ==================== COMPTEURS ANIMÉS ====================
+        function animateCounters() {
+            const counters = [
+                { element: 'counter1', target: 127, suffix: '' },
+                { element: 'counter2', target: 543, suffix: '' },
+                { element: 'counter3', target: 89, suffix: '' },
+                { element: 'counter4', target: 42, suffix: 'k€' }
+            ];
+            
+            counters.forEach(counter => {
+                const element = document.getElementById(counter.element);
+                let current = 0;
+                const increment = counter.target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= counter.target) {
+                        current = counter.target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current) + counter.suffix;
+                }, 30);
+            });
+        }
+        
+        // ==================== PARTICULES ====================
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.width = particle.style.height = (Math.random() * 3 + 2) + 'px';
+                particle.style.background = `hsl(${Math.random() * 60 + 200}, 70%, 60%)`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // ==================== FONCTIONS INTERACTIVES ====================
+        function joinNIRD() {
+            alert('🎯 Rejoindre le Village NIRD\n\n' +
+                  '1. Visitez notre forum Tchap\n' +
+                  '2. Participez aux webinaires\n' +
+                  '3. Impliquez votre établissement\n' +
+                  '4. Contribuez à la co-construction\n\n' +
+                  'Ensemble, résistons aux Big Tech !');
+        }
+        
+        
+        function showWebinars() {
+            alert('📅 Webinaires NIRD\n\n' +
+                  'Programme à venir:\n' +
+                  '• Présentation de la démarche\n' +
+                  '• Installation de Linux NIRD\n' +
+                  '• Guide du reconditionnement\n' +
+                  '• Témoignages d\'établissements\n\n' +
+                  'Inscrivez-vous sur notre forum !');
+        }
+        
+        function showVillageois(num) {
+            const villageois = [
+                { name: 'Prof Astérix', role: 'Enseignant résistant', desc: 'Initie la démarche dans son établissement' },
+                { name: 'Obélix Code', role: 'Hacker en herbe', desc: 'Participe au reconditionnement des ordinateurs' },
+                { name: 'Panoramix Tech', role: 'Collectivité éclairée', desc: 'Soutient la transition numérique responsable' }
+            ];
+            
+            const v = villageois[num - 1];
+            alert(`👤 ${v.name}\n\n` +
+                  `Rôle : ${v.role}\n` +
+                  `Mission : ${v.desc}\n\n` +
+                  'Chaque villageois a un rôle crucial dans notre résistance numérique !');
+        }
+        
+        function startMiniJeu() {
+            alert('🎮 Défi du Village : Reconditionnement Express !\n\n' +
+                  'Mission : Sauver 3 ordinateurs de la poubelle\n\n' +
+                  '1. 🔧 Démontage des anciens PC\n' +
+                  '2. 🧼 Nettoyage des composants\n' +
+                  '3. 🐧 Installation de Linux\n' +
+                  '4. 🎓 Test avec les élèves\n\n' +
+                  'Bravo ! Vous avez reconditionné +1 ordinateur !');
+        }
+        
+        function startPhase(phase) {
+            const phases = [
+                'Phase de Mobilisation',
+                'Phase d\'Expérimentation', 
+                'Phase d\'Intégration'
+            ];
+            
+            const resources = [
+                'Forum Tchap #mobilisation',
+                'Kit Linux NIRD + PrimTux',
+                'Guide d\'intégration institutionnelle'
+            ];
+            
+            alert(`🚀 Lancement de la ${phases[phase-1]} !\n\n` +
+                  `Ressources : ${resources[phase-1]}\n\n` +
+                  'Consignes :\n' +
+                  '1. Rejoignez le canal Tchap correspondant\n' +
+                  '2. Documentez votre progression\n' +
+                  '3. Partagez vos retours d\'expérience\n\n' +
+                  'Bon courage, villageois !');
+        }
+        
+        function tryChatbot() {
+            alert('🤖 Chat\'Bruti en action !\n\n' +
+                  'ChatBruti : "Salut ! Tu veux savoir pourquoi Linux c\'est génifique ?"\n' +
+                  'Vous : "Oui, explique-moi !"\n' +
+                  'ChatBruti : "Parce que c\'est comme une potion magique : gratuit, respectueux et durable !\n' +
+                  'Pas besoin d\'être Panoramix pour comprendre que c\'est mieux que les potions Windows !"\n\n' +
+                  '(Version complète en développement)');
+        }
+        
+        function exploreMap() {
+            alert('🗺️ Carte des Talents NIRD\n\n' +
+                  'Découvrez les compétences de notre communauté :\n\n' +
+                  '📍 Lyon : Experts Linux écoles primaires\n' +
+                  '📍 Blois : Spécialistes reconditionnement\n' +
+                  '📍 Bruay-la-Buissière : Pionniers du projet\n' +
+                  '📍 Votre ville ? : Rejoignez la carte !');
+        }
+        
+        function joinRanking() {
+            alert('🏆 Rejoindre le classement !\n\n' +
+                  'Pour figurer dans le classement des villages résistants :\n' +
+                  '1. Lancez la démarche dans votre établissement\n' +
+                  '2. Documentez vos actions sur Tchap\n' +
+                  '3. Accumulez des badges NIRD\n\n' +
+                  'À vous de jouer ! Le village a besoin de vous !');
+        }
+        
+        // ==================== DISTRIBUTIONS LINUX ====================
+        function downloadLinuxNIRD() {
+            alert('📥 Téléchargement Linux NIRD\n\n' +
+                  'Version installable pour le secondaire\n' +
+                  '• Taille : ~2.5 Go\n' +
+                  '• Compatible : PC de 2010 ou plus récent\n' +
+                  '• Logiciels inclus : Suite bureautique, outils pédagogiques, NSI\n\n' +
+                  'Le téléchargement va commencer...');
+        }
+        
+        function downloadUsbVersion() {
+            alert('💾 Version USB Linux NIRD\n\n' +
+                  'Version live USB avec compte élève pré-configuré\n' +
+                  '• Testez sans installer\n' +
+                  '• Idéal pour démonstrations\n' +
+                  '• Outils pédagogiques pré-installés\n\n' +
+                  'Utilisez Ventoy, Balena Etcher ou Rufus pour créer la clé USB.');
+        }
+        
+        function visitPrimTux() {
+            alert('🌐 Site officiel PrimTux\n\n' +
+                  'Vous serez redirigé vers :\n' +
+                  'https://primtux.fr\n\n' +
+                  '• Documentation complète\n' +
+                  '• Téléchargements\n' +
+                  '• Forum de la communauté\n' +
+                  '• Ressources pédagogiques');
+        }
+        
+        function watchVideo() {
+            alert('🎬 Vidéo de présentation PrimTux\n\n' +
+                  'Découvrez PrimTux en 2 minutes :\n' +
+                  '• Interface adaptée aux enfants\n' +
+                  '• Applications pédagogiques\n' +
+                  '• Multi-profils (cycles 1, 2, 3)\n' +
+                  '• Témoignages d\'enseignants');
+        }
+        
+        function testOnline() {
+            alert('🖥️ Tester PrimTux en ligne\n\n' +
+                  'Essayez PrimTux directement dans votre navigateur :\n' +
+                  '• Pas d\'installation nécessaire\n' +
+                  '• Version limitée (plus lent)\n' +
+                  '• Parfait pour une première découverte\n' +
+                  '• Idéal pour formations à distance');
+        }
+        
+        // ==================== NAVIGATION ====================
+        // Navigation active
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Ensure touchmove is passive so it cannot block scrolling on some devices
+        (function(){
+            try {
+                window.addEventListener('touchmove', function(){}, { passive: true });
+            } catch(e) {
+                // old browsers: ignore
+            }
+        })();
+    </script>
+</body>
+</html>
