@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+bower_components/
+vendor/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+log/
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Images non optimisées
+*.psd
+*.ai
+*.sketch
+
+# Fichiers de build
+dist/
+build/
+out/
+public/build/
+
+# Fichiers système
+.sass-cache/
+.cache/
+.tmp/
+temp/
+
+# Fichiers de configuration spécifiques
+package-lock.json  # (À inclure ou non selon votre workflow)
+yarn.lock
+
+# Fichiers personnels
+.secret
+*.key
+*.pem
